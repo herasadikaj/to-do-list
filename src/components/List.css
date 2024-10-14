@@ -1,0 +1,159 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #D1E0DE; 
+}
+.add-todo {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  justify-content: center;
+}
+.title{
+  justify-content: center;
+  display: flex;
+  color: #3d3d4f
+}
+
+.add-todo input {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  width: 200px;
+}
+
+.add-todo button {
+  background-color:  #93b58f;
+
+  color: white;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-todo button:hover {
+  background-color:  #84a481; .add-todo {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center; 
+  }
+  
+  .add-todo input {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    width: 200px;
+  }
+  
+  .add-todo button {
+    background-color:  #93b58f;
+
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .add-todo button:hover {
+    background-color:  #93b58f;
+
+  }
+  
+
+  .todo-list {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    flex-direction: column; 
+  }
+  
+}
+
+.todo-container {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: space-between; 
+}
+
+
+.todo-card {
+  background-color: #525266;
+  border: 1px solid #D1E0DE;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 16px;
+  margin: 4px; 
+  width: calc(33.333% - 16px); 
+  box-sizing: border-box; 
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  align-items: center; 
+  gap: 16px; 
+}
+
+
+.todo-checkbox input {
+  margin-left: 8px;
+  transform: scale(1.5);
+}
+
+
+.todo-text p {
+  margin: 0;
+  font-size: 1.1em;
+  text-align: center; 
+}
+
+
+.todo-buttons {
+  display: flex;
+  justify-content: center; 
+  gap: 8px; 
+}
+
+
+.todo-buttons button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color:  #D1E0DE; 
+  color: black;
+}
+
+.todo-buttons button:hover {
+  background-color: #93b58f;
+
+}
+
+@media (max-width: 768px) {
+  .todo-card {
+    width: calc(50% - 16px); 
+  }
+}
+
+@media (max-width: 576px) {
+  .todo-card {
+    width: 100%; 
+    margin-bottom: 16px; 
+  }
+
+  .add-todo input {
+    width: 100%; 
+  }
+
+  .add-todo {
+    flex-direction: column; 
+    gap: 12px;
+  }
+
+  .todo-buttons {
+    flex-direction: column; 
+    gap: 12px;
+  }
+}
