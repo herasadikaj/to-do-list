@@ -115,6 +115,26 @@ html, body {
   justify-content: center; 
   gap: 8px; 
 }
+.button-group {
+  display: flex;
+  gap: 10px;
+}
+
+.button {
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.save-button {
+  background-color: green;
+  color: white;
+}
+
+.edit-button {
+  background-color: blue;
+  color: white;
+}
 
 
 .todo-buttons button {

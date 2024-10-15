@@ -1,19 +1,21 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import './List'; 
+import './List.css'; 
 
-const Buttons = ({ onEdit, onDelete }) => {
+const Buttons = ({ isEditing, onSave, onEdit, onDelete }) => {
   return (
     <div className="button-group">
-      <button onClick={onEdit} className="button edit-button">Edit</button>
-      <button onClick={onDelete} className="button delete-button">Delete</button>
+      {isEditing ? (
+        <button onClick={onSave} className="button save-button">Save</button>
+      ) : (
+        <>
+          <button onClick={onEdit} className="button edit-button">Edit</button>
+          <button onClick={onDelete} className="button delete-button">Delete</button>
+        </>
+      )}
     </div>
   );
 };
 
-Buttons.propTypes = {
-  onEdit: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
-};
+
 
 export default Buttons;

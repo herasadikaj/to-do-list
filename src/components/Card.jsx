@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Buttons from './Buton'; 
 import './List.css'; 
 
 const Todo = ({ id, task, handleDeleteTodo, handleUpdateTodo }) => {
@@ -9,6 +10,14 @@ const Todo = ({ id, task, handleDeleteTodo, handleUpdateTodo }) => {
   const handleSave = () => {
     handleUpdateTodo(id, updatedTask);
     setIsEditing(false);
+  };
+
+  const handleEdit = () => {
+    setIsEditing(true);
+  };
+
+  const handleDelete = () => {
+    handleDeleteTodo(id);
   };
 
   return (
@@ -34,14 +43,12 @@ const Todo = ({ id, task, handleDeleteTodo, handleUpdateTodo }) => {
       </div>
 
       <div className="todo-buttons">
-        {isEditing ? (
-          <button onClick={handleSave}>Save</button>
-        ) : (
-          <>
-            <button onClick={() => setIsEditing(true)}>Edit</button>
-            <button onClick={() => handleDeleteTodo(id)}>Delete</button>
-          </>
-        )}
+        <Buttons
+          isEditing={isEditing}
+          onSave={handleSave}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
+        />
       </div>
     </div>
   );
