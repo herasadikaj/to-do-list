@@ -1,60 +1,51 @@
-import React, { useState } from 'react';
-import Todo from './Card'; 
+import React, { useEffect, useState } from 'react';
+import AddTodo from './Add';  
+import Todo from './Card';  
 import './List.css'; 
-
+import Widget from './Widget';
 const TodoList = () => {
-  const [todos, setTodos] = useState([
-    { id: 1, task: 'Buy milk' },
-    { id: 2, task: 'Cook dinner' },
-    { id: 3, task: 'Finish the task' },
-    { id: 4, task:'Water the plants'},
-  ]);
+  const [todos, setTodos] = useState([]);  
+  const [error, setError] = useState(null);  
 
-  const [newTask, setNewTask] = useState(''); 
 
-  const handleAddTodo = () => {
-    if (newTask.trim() !== '') {
-      const newTodo = {
-        id: todos.length + 1, 
-        task: newTask,
-      };
-      setTodos([...todos, newTodo]); 
-      setNewTask(''); 
+  const fetchTodos = async () => {
+    try {
+      const response = await fetch('http://localhost:8080/todos');
+      if (!response.ok) {
+        throw new Error('Failed to fetch todos');
+      }
+      const data = await response.json();
+      setTodos(data);  
+    } catch (err) {
+      setError('Failed to fetch todos. Please try again.');
     }
   };
 
-  const handleDeleteTodo = (id) => {
-    setTodos(todos.filter(todo => todo.id !== id));
-  };
+ 
+  useEffect(() => {
+    fetchTodos();  
+  }, []);  
 
-  const handleUpdateTodo = (id, updatedTask) => {
-    setTodos(todos.map(todo => 
-      todo.id === id ? { ...todo, task: updatedTask } : todo
-    ));
+
+  const addNewTodo = (newTodo) => {
+    setTodos((prevTodos) => [...prevTodos, newTodo]); 
   };
 
   return (
     <div className="todo-list">
       <h1 className="title">TO DO LIST</h1>
-      <div className="add-todo">
-        <input
-          type="text"
-          value={newTask}
-          onChange={(e) => setNewTask(e.target.value)}
-          placeholder="Add a new to-do"
-        />
-        <button onClick={handleAddTodo}>Add To-Do</button>
-      </div>
+      <AddTodo addNewTodo={addNewTodo} />
 
-      
+      {error && <p className="error">{error}</p>}
+      <Widget todos={todos} /> 
       <div className="todo-container">
         {todos.map(todo => (
           <Todo
             key={todo.id}
             id={todo.id}
-            task={todo.task}
-            handleDeleteTodo={handleDeleteTodo}
-            handleUpdateTodo={handleUpdateTodo}
+            title={todo.title}
+            description={todo.description}
+            fetchTodos={fetchTodos} 
           />
         ))}
       </div>

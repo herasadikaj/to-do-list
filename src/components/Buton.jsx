@@ -1,21 +1,21 @@
 import React from 'react';
-import './List.css'; 
 
-const Buttons = ({ isEditing, onSave, onEdit, onDelete }) => {
+const Buttons = ({ isEditing, onSave, onEdit, onDelete, onCancel }) => {
   return (
-    <div className="button-group">
+    <div  className="button-group">
       {isEditing ? (
-        <button onClick={onSave} className="button save-button">Save</button>
+        <>
+          <button onClick={() => { console.log("Save clicked"); onSave(); }} > Save </button>
+          <button onClick={() => { console.log("Cancel clicked"); onCancel(false); }}>Cancel </button>
+        </>
       ) : (
         <>
-          <button onClick={onEdit} className="button edit-button">Edit</button>
-          <button onClick={onDelete} className="button delete-button">Delete</button>
+          <button onClick={() => { console.log("Edit clicked"); onEdit(); }}> Edit </button>
+          <button onClick={() => {  console.log("Delete clicked"); onDelete(); }}> Delete </button>
         </>
       )}
     </div>
   );
 };
-
-
 
 export default Buttons;
