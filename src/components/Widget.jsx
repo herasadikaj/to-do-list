@@ -2,11 +2,10 @@ import React, { useMemo } from 'react';
 
 const Widget = ({ todos }) => {
   const { doneCount, undoneCount } = useMemo(() => {
-    const doneCount = todos.filter(todo => todo.isChecked).length;
+    const doneCount = todos.filter(todo => todo.completed).length; 
     const undoneCount = todos.length - doneCount;
-
     return { doneCount, undoneCount };
-  }, [todos]);
+  }, [todos]); 
 
   return (
     <div className="widget">

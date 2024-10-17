@@ -82,19 +82,16 @@ html, body {
 .todo-card {
   background-color: #525266;
   border: 1px solid #D1E0DE;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  padding: 16px;
-  box-sizing: border-box; 
-  display: flex;
-  flex-direction: column;
-  justify-content: center; 
-  align-items: center; 
-  gap: 16px; 
-  height: 200px;
+  display: flex;                     
+  flex-direction: column;           
+  align-items: center;              
+  justify-content: center;          
+  height: 200px;                     
+  padding: 20px;                    
+  border-radius: 8px;                
+  margin: 10px;                     
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
-
-
 
 .todo-checkbox input {
   margin-left: 8px;
@@ -148,6 +145,47 @@ html, body {
 .todo-buttons button:hover {
   background-color: #93b58f;
 
+}
+.todo-checkbox {
+  margin-bottom: 10px; 
+}
+
+.todo-text {
+  text-align: center;
+}
+
+.todo-buttons {
+  display: flex; 
+  justify-content: center; 
+  margin-top: 10px; 
+}
+
+
+.widget {
+  display: flex;                   
+  flex-direction: column;           
+  align-items: center;              
+  justify-content: center;          
+  padding: 20px;                    
+  border: 1px solid #ccc;          
+  border-radius: 8px;               
+  background-color: #93b58f;    
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  margin: 20px;                 
+  max-width: 100px;       
+  height:100px;         
+}
+
+.widget h2 {
+  margin-bottom: 10px;             
+  font-size: 1.0em;   
+  color: #525266;             
+}
+
+.widget p {
+  margin: 5px 0;                   
+  font-size: 0.9em;    
+  color: #525266;               
 }
 
 @media (max-width: 768px) {

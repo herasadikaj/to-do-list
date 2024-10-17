@@ -45,6 +45,7 @@ const TodoList = () => {
             id={todo.id}
             title={todo.title}
             description={todo.description}
+            
             fetchTodos={fetchTodos} 
           />
         ))}

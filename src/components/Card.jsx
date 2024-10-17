@@ -1,97 +1,97 @@
+
 import React, { useState, useEffect } from 'react';
 import Buttons from './Buton'; 
-import './List.css'; 
+import './List.css';
 import './Widget';
-const Card = ({ id, title, description, isChecked: initialChecked, fetchTodos }) => {
-  const [isEditing, setIsEditing] = useState(false); 
-  const [updatedTitle, setUpdatedTitle] = useState(title); 
-  const [updatedDescription, setUpdatedDescription] = useState(description); 
-  const [isChecked, setIsChecked] = useState(initialChecked); 
+
+const Card = ({ id, title = '', description = '', isChecked: initialChecked = false, fetchTodos }) => {
+  const [isEditing, setIsEditing] = useState(false);
+  const [updatedTitle, setUpdatedTitle] = useState(title);
+  const [updatedDescription, setUpdatedDescription] = useState(description);
+  const [isChecked, setIsChecked] = useState(initialChecked);
 
   useEffect(() => {
-    setUpdatedTitle(title);
-    setUpdatedDescription(description);
+    setUpdatedTitle(title || ''); 
+    setUpdatedDescription(description || ''); 
     setIsChecked(initialChecked); 
   }, [title, description, initialChecked]);
 
   const toggleChecked = async () => {
-    const newCheckedState = !isChecked;
-
+    const updatedTask = { completed: !isChecked }; 
+    setIsChecked((prev) => !prev); 
+  
     try {
       const response = await fetch(`http://localhost:8080/todos/${id}`, {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          isChecked: newCheckedState,
-        }),
+        body: JSON.stringify(updatedTask),
       });
-
+  
       if (!response.ok) {
-        throw new Error(`Failed to update checked status: ${response.status} - ${response.statusText}`);
+        throw new Error('Failed to update the task');
       }
+  
 
-      setIsChecked(newCheckedState); 
+      fetchTodos(); 
     } catch (error) {
-      console.error('Error updating checked status:', error.message);
+      console.error('Error updating task:', error.message);
     }
   };
   
-
   const saveTodo = async () => {
-    console.log('Saving todo with ID:', id); 
-    console.log('Updated Title:', updatedTitle); 
+    console.log('Saving todo with ID:', id);
+    console.log('Updated Title:', updatedTitle);
     console.log('Updated Description:', updatedDescription);
-    
+
     try {
       const response = await fetch(`http://localhost:8080/todos/${id}`, {
-        method: 'PATCH', 
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           title: updatedTitle,
           description: updatedDescription,
-          isChecked, 
+          completed: isChecked, 
         }),
       });
-  
+
       if (!response.ok) {
-        console.error(`Failed to save data: ${response.status} - ${response.statusText}`);
-        throw new Error('Failed to save data');
+        throw new Error(`Failed to save data: ${response.status} - ${response.statusText}`);
       }
-  
-      const data = await response.json(); 
-      console.log('Data saved successfully:', data); 
-      setIsEditing(false); 
-      fetchTodos(); 
+
+      const data = await response.json();
+      console.log('Data saved successfully:', data);
+      setIsEditing(false);
+      fetchTodos();
     } catch (error) {
-      console.error('Error updating todo:', error.message); 
+      console.error('Error updating todo:', error.message);
     }
   };
 
   const editTodo = () => {
-    console.log('Editing todo...'); 
+    console.log('Editing todo...');
     setIsEditing(true);
   };
 
   const cancelEdit = () => {
     console.log('Cancelling edit...');
-    setUpdatedTitle(title); 
-    setUpdatedDescription(description); 
-    setIsEditing(false); 
+    setUpdatedTitle(title || '');
+    setUpdatedDescription(description || ''); 
+    setIsEditing(false);
   };
 
   const deleteTodo = async () => {
-    console.log('Deleting todo...'); 
+    console.log('Deleting todo...');
     try {
       const response = await fetch(`http://localhost:8080/todos/${id}`, {
         method: 'DELETE',
       });
 
       if (response.ok) {
-        fetchTodos(); 
+        fetchTodos();
       } else {
         console.error('Failed to delete todo:', response.statusText);
       }
