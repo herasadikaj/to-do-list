@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Buttons = (({ isEditing, onSave, onEdit, onDelete, onCancel }) => {
+const Buttons = React.memo(({ isEditing, onSave, onEdit, onDelete, onCancel }) => {
   return (
     <div className="button-group">
       {isEditing ? (
