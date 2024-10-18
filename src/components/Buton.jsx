@@ -1,7 +1,7 @@
 
 import React from 'react';
 
-const Buttons = React.memo(({ isEditing, onSave, onEdit, onDelete, onCancel }) => {
+const Buttons = (({ isEditing, onSave, onEdit, onDelete, onCancel }) => {
   return (
     <div className="button-group">
       {isEditing ? (
@@ -20,3 +20,6 @@ const Buttons = React.memo(({ isEditing, onSave, onEdit, onDelete, onCancel }) =
 });
 
 export default Buttons;
+
+
+
